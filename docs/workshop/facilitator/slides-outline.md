@@ -1,5 +1,7 @@
 # Slide outline - intro talk (≈20 min) + adr-skill demo interstitial
 
+> **Ready to present:** this outline is built as a self-contained HTML deck in [`slides.html`](./slides.html) - open it in any browser, no internet needed. Arrow keys navigate, `F` for fullscreen, and `#slide-number` in the URL jumps straight to a slide (the 1:20 habits interstitial starts at `#13`, the 2:20 ADR demo at `#20`).
+
 Builds on the deck from the 15-min talk (`schiphol-cop-demo/presentation/`); slides 1–4 can be lifted from it almost unchanged, then the new material starts.
 
 ## Part 1 - Welcome (slides 1–4, ~5 min)

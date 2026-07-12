@@ -1,6 +1,6 @@
 # Facilitator runbook
 
-Host script for the 3.5–4 h workshop, ~20 participants. Companion files: [solutions.md](./solutions.md) (root causes, expected diffs, hints) and [slides-outline.md](./slides-outline.md) (intro deck).
+Host script for the 3.5–4 h workshop, ~20 participants. Companion files: [solutions.md](./solutions.md) (root causes, expected diffs, hints), [slides-outline.md](./slides-outline.md) (deck outline + talking points), and [slides.html](./slides.html) (the presentable deck - open in a browser, works offline).
 
 ## Before the day
 

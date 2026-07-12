@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jira → PR - Schiphol Copilot CoP Workshop</title>
+<style>
+  :root {
+    --bg: #1a1b26;
+    --bg-soft: #24283b;
+    --bg-code: #16161e;
+    --fg: #c0caf5;
+    --fg-dim: #565f89;
+    --blue: #7aa2f7;
+    --green: #9ece6a;
+    --red: #f7768e;
+    --yellow: #e0af68;
+    --purple: #bb9af7;
+    --cyan: #7dcfff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; background: var(--bg); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--fg);
+    font-size: clamp(16px, 2.1vh, 26px);
+  }
+  code, pre, kbd, .mono {
+    font-family: "MesloLGS NF", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+  }
+
+  .slide {
+    display: none;
+    position: absolute;
+    inset: 0;
+    padding: 7vh 8vw 10vh 8vw;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide.active { display: flex; }
+
+  .kicker {
+    position: absolute;
+    top: 3.2vh;
+    left: 8vw;
+    font-size: 0.62em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .kicker b { color: var(--blue); font-weight: 600; }
+
+  h1 { font-size: 2.6em; line-height: 1.12; letter-spacing: -0.01em; }
+  h2 { font-size: 1.9em; line-height: 1.15; margin-bottom: 0.8em; letter-spacing: -0.01em; }
+  h1 .accent, h2 .accent { color: var(--blue); }
+  .subtitle { font-size: 1.15em; color: var(--fg-dim); margin-top: 1em; }
+
+  p, li { line-height: 1.5; }
+  ul.points { list-style: none; font-size: 1.08em; }
+  ul.points li { margin: 0.55em 0; padding-left: 1.3em; position: relative; }
+  ul.points li::before { content: "▸"; position: absolute; left: 0; color: var(--blue); }
+  ul.points li.good::before { content: "✓"; color: var(--green); }
+  ul.points li.bad::before  { content: "✗"; color: var(--red); }
+  ul.points ul { list-style: none; font-size: 0.85em; color: var(--fg-dim); margin-top: 0.3em; }
+  ul.points ul li { margin: 0.25em 0; }
+  ul.points ul li::before { content: "·"; color: var(--fg-dim); }
+
+  .big-line { font-size: 1.5em; line-height: 1.35; font-weight: 600; }
+  .big-line .accent { color: var(--blue); }
+  .dim { color: var(--fg-dim); }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .yellow { color: var(--yellow); }
+  .purple { color: var(--purple); }
+  .cyan { color: var(--cyan); }
+
+  pre {
+    background: var(--bg-code);
+    border: 1px solid #2a2e42;
+    border-radius: 10px;
+    padding: 0.9em 1.1em;
+    font-size: 0.78em;
+    line-height: 1.55;
+    overflow-x: auto;
+    margin: 0.9em 0;
+  }
+  code.inline {
+    background: var(--bg-code);
+    border: 1px solid #2a2e42;
+    border-radius: 5px;
+    padding: 0.1em 0.4em;
+    font-size: 0.88em;
+    color: var(--cyan);
+  }
+
+  table { border-collapse: collapse; width: 100%; font-size: 0.85em; }
+  th, td { text-align: left; padding: 0.42em 0.9em; border-bottom: 1px solid #2a2e42; }
+  th { color: var(--blue); text-transform: uppercase; font-size: 0.75em; letter-spacing: 0.12em; }
+  td:first-child { color: var(--yellow); white-space: nowrap; }
+
+  .cols { display: flex; gap: 4vw; align-items: flex-start; }
+  .cols > div { flex: 1; }
+
+  .quote {
+    border-left: 4px solid var(--blue);
+    padding: 0.4em 0 0.4em 1em;
+    font-size: 1.25em;
+    font-style: italic;
+    color: var(--fg);
+    margin: 1em 0;
+  }
+  .quote .dim { font-style: normal; font-size: 0.7em; display: block; margin-top: 0.6em; }
+
+  .badge {
+    display: inline-block;
+    background: var(--bg-soft);
+    border: 1px solid #2a2e42;
+    border-radius: 999px;
+    padding: 0.15em 0.75em;
+    font-size: 0.65em;
+    color: var(--purple);
+    margin-right: 0.5em;
+    vertical-align: middle;
+  }
+
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    background: var(--blue);
+    width: 0;
+    transition: width 0.25s ease;
+    z-index: 10;
+  }
+  #pager {
+    position: fixed;
+    bottom: 2.4vh;
+    right: 3vw;
+    font-size: 0.7em;
+    color: var(--fg-dim);
+    z-index: 10;
+  }
+  #hint {
+    position: fixed;
+    bottom: 2.4vh;
+    left: 3vw;
+    font-size: 0.62em;
+    color: var(--fg-dim);
+    z-index: 10;
+  }
+  kbd {
+    background: var(--bg-soft);
+    border: 1px solid #3b4261;
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 0 0.35em;
+    font-size: 0.9em;
+  }
+
+  .nav-zone { position: fixed; top: 0; bottom: 0; width: 18vw; z-index: 5; cursor: pointer; }
+  #zone-prev { left: 0; }
+  #zone-next { right: 0; }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ══════════════ PART 1 · WELCOME (0:00) ══════════════ -->
+
+<section class="slide">
+  <div class="kicker"><b>Schiphol Copilot CoP</b> · workshop edition</div>
+  <h1>Jira → PR<br><span class="accent">this time, you drive.</span></h1>
+  <p class="subtitle">Martijn Scholten<br>
+  <span class="mono">github.com/scholtenmartijn/schiphol-cop-workshop</span></p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Welcome</b> · last time, in 15 minutes</div>
+  <h2>Where we left off</h2>
+  <ul class="points">
+    <li class="good">Ticket read <span class="dim">- acli, not a browser</span></li>
+    <li class="good">Code written <span class="dim">- agent typed, human steered</span></li>
+    <li class="good">Tests green</li>
+    <li class="good">PR open and linked</li>
+  </ul>
+  <p class="quote">"I never left this window."<span class="dim">The demo proved the loop exists. Today you make it yours.</span></p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Welcome</b> · today's contract</div>
+  <h2>The next four hours</h2>
+  <table>
+    <tr><th>Time</th><th>Block</th></tr>
+    <tr><td>0:00</td><td>How a repo steers an agent: instructions, AGENTS.md, <b>skills</b></td></tr>
+    <tr><td>0:20</td><td>Setup clinic - everyone to a green <code class="inline">check-setup.sh</code></td></tr>
+    <tr><td>0:50</td><td>Guided: Exercise 1 together, the full loop</td></tr>
+    <tr><td>1:20</td><td>Agentic engineering - 9 habits before you fly solo</td></tr>
+    <tr><td>1:30</td><td>Self-paced: Exercises 2-4</td></tr>
+    <tr><td>2:20</td><td>Break + the <b>adr skill</b>, live</td></tr>
+    <tr><td>2:35</td><td>Self-paced: Exercises 5-6 + stretch</td></tr>
+    <tr><td>3:30</td><td>Show &amp; tell · retro · cleanup</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Welcome</b> · the cast</div>
+  <h2>What you'll be flying</h2>
+  <ul class="points">
+    <li><b>GitHub Copilot</b> in agent mode - any IDE you like</li>
+    <li><code class="inline">acli</code> - Jira from the terminal</li>
+    <li><code class="inline">gh</code> - GitHub from the terminal</li>
+    <li><code class="inline">schiphol-ops</code> - a ~600-line Python CLI: departures, arrivals, gates, stats</li>
+  </ul>
+  <p class="subtitle">Nobody needs to be a Python expert.<br>The agent writes Python. <b class="green">You supervise engineering.</b></p>
+</section>
+
+<!-- ══════════════ PART 2 · STEERING (slides 5-9) ══════════════ -->
+
+<section class="slide">
+  <div class="kicker"><b>Steering the agent</b> · the problem</div>
+  <p class="big-line">An agent with no context is a very fast intern<br>on their <span class="accent">first day</span>. <span class="red">Forever.</span></p>
+  <p class="subtitle">Prompting harder doesn't scale.<br>The <b>repo itself</b> must carry the context.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Steering the agent</b> · four layers</div>
+  <h2>How this repo teaches Copilot</h2>
+  <pre>
+<span class="dim">repo/</span>
+├── .github/<span class="cyan">copilot-instructions.md</span>   <span class="green">always on</span>       <span class="dim">policy: plan first, stdlib only, git rules</span>
+├── .github/instructions/<span class="cyan">*.md</span>          <span class="yellow">per path</span>        <span class="dim">Python style for *.py, test style for tests/</span>
+├── <span class="cyan">AGENTS.md</span>                          <span class="purple">agent mode</span>      <span class="dim">allowed tools + the 8-step ritual</span>
+└── .github/skills/<span class="cyan">*/SKILL.md</span>          <span class="red">on demand</span>       <span class="dim">procedures, loaded when the task matches</span>
+</pre>
+  <p class="subtitle">Each rule lives in exactly <b>one</b> layer <span class="dim">(ADR-0004)</span></p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Steering the agent</b> · skills, up close</div>
+  <h2>Anatomy of a skill</h2>
+  <pre>
+<span class="dim">.github/skills/jira/SKILL.md</span>
+---
+name: <span class="cyan">jira</span>
+description: <span class="yellow">Work with Jira tickets using acli. Use when the user
+  mentions a ticket key, asks to pull context, comment, transition...</span>  <span class="red">← the trigger</span>
+---
+# Jira via acli                                                    <span class="red">← the procedure</span>
+acli jira workitem view &lt;KEY&gt; --json --fields '*all'
+...
+</pre>
+  <ul class="points">
+    <li>You say <i>"pick up OPS-3"</i> → description matches → recipe loads</li>
+    <li>Versioned <b>with the code</b>: a broken recipe is a bug you fix by PR <span class="dim">(ADR-0007)</span></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Steering the agent</b> · today's three</div>
+  <h2>The skills you'll use</h2>
+  <ul class="points">
+    <li><b class="cyan">jira</b> - tickets in and out of the terminal: view, assign, comment, transition</li>
+    <li><b class="cyan">github</b> - branch → conventional commit → templated PR, checks</li>
+    <li><b class="cyan">adr</b> - decide <i>before</i> you code, in writing</li>
+  </ul>
+  <p class="subtitle">Exercise 5 will refuse to let you code before the ADR exists.<br><b>On purpose.</b></p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Steering the agent</b> · ADRs in 60 seconds</div>
+  <h2>Architecture Decision Records</h2>
+  <ul class="points">
+    <li><b>Status / Context / Decision / Consequences</b> - one page, one decision</li>
+    <li>Append-only: supersede, don't edit</li>
+    <li>Live in <code class="inline">docs/adr/</code>, next to the code they bind</li>
+  </ul>
+  <p class="quote">The agent reads <span class="mono">docs/adr/</span> before planning -<br>so your <b>past decisions</b> steer <b>today's diff</b>.</p>
+</section>
+
+<!-- ══════════════ PART 3 · LAUNCH (slides 10-12) ══════════════ -->
+
+<section class="slide">
+  <div class="kicker"><b>Launch</b> · the loop</div>
+  <h2>What you'll repeat all afternoon</h2>
+  <div class="cols">
+    <div><ul class="points">
+      <li><b>1.</b> Pull the ticket <span class="dim">(jira skill)</span></li>
+      <li><b>2.</b> Reproduce the bug first</li>
+      <li><b>3.</b> Plan - <b class="red">push back, every time</b></li>
+      <li><b>4.</b> Implement <span class="dim">(agent types)</span></li>
+    </ul></div>
+    <div><ul class="points">
+      <li><b>5.</b> Verify: pytest + repro</li>
+      <li><b>6.</b> Read the whole diff</li>
+      <li><b>7.</b> PR <span class="dim">(github skill)</span></li>
+      <li><b>8.</b> Close the loop in Jira</li>
+    </ul></div>
+  </div>
+  <p class="subtitle">Step 3 is the skill being trained today.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Launch</b> · ground rules</div>
+  <h2>Ground rules</h2>
+  <ul class="points">
+    <li>One ticket = one branch = one PR <span class="dim">- on your fork</span></li>
+    <li>Bugs: reproduce first, then a regression test that <b>fails on the old code</b></li>
+    <li>Features: every acceptance criterion gets a test</li>
+  </ul>
+  <p class="quote">The suite is <span class="green">green</span> <i>and</i> the code has <span class="red">3 bugs</span>.<span class="dim">Trust tickets, not tests.</span></p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Launch</b> · go</div>
+  <h2>Go</h2>
+  <pre style="font-size: 1em">
+$ <span class="green">./scripts/check-setup.sh</span>
+</pre>
+  <ul class="points">
+    <li class="good">All green → open the <b>participant guide</b> and start Exercise 1 prep</li>
+    <li class="bad">Anything red → hand up, floaters incoming</li>
+  </ul>
+</section>
+
+<!-- ══════════════ INTERSTITIAL 1 · AGENTIC ENGINEERING (1:20) ══════════════ -->
+
+<section class="slide">
+  <div class="kicker"><b>1:20</b> · interstitial</div>
+  <h1>Agentic engineering<br><span class="accent">nine habits</span></h1>
+  <p class="subtitle">You just watched the loop work once.<br>These habits are why it worked - and what to do when it doesn't.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Habits</b> · #1 #2 #9</div>
+  <h2>Plan first. Human decides.</h2>
+  <ul class="points">
+    <li><b>#1</b> Human plans, agent executes - review plans, not 400-line diffs</li>
+    <li><b>#2</b> Fresh session per ticket - old threads pollute context</li>
+    <li><b>#9</b> Decisions stay human - unmade decision in the plan? Stop. Decide. Write it down.</li>
+  </ul>
+  <p class="quote">You watched me push back on a <i>correct</i> plan.<span class="dim">That reflex is the job.</span></p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Habits</b> · #3 · the money slide</div>
+  <h2>Two strikes, <span class="red">then reset</span></h2>
+  <ul class="points">
+    <li>A failing thread is <b>sunk cost</b></li>
+    <li>The context window now contains a <b>record of failure</b> - and it steers the next attempt</li>
+    <li>Kill it. Restart with a <b class="green">tighter plan</b>: name the file, forbid the failed approach, shrink the task</li>
+  </ul>
+  <p class="quote">"If you're <b>negotiating</b> with the chat - reset."</p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Habits</b> · #4</div>
+  <h2>Small, scoped tasks</h2>
+  <ul class="points">
+    <li>One ticket = one branch = one PR</li>
+    <li>Plan longer than ~5 steps → <b>split the ticket</b>, not the difference</li>
+    <li>Invented scope is where hallucinated requirements live</li>
+  </ul>
+  <p class="subtitle">Today's tickets are pre-scoped. Notice how that feels -<br>then blame your backlog, not your model.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Habits</b> · #5 #6 #8</div>
+  <h2>Harness engineering</h2>
+  <pre>
+<span class="cyan">copilot-instructions.md</span>  <span class="dim">policy</span>          <span class="cyan">docs/adr/</span>       <span class="dim">decisions</span>
+<span class="cyan">instructions/*.md</span>        <span class="dim">style per path</span>  <span class="cyan">tests/</span>          <span class="dim">sub-second, deterministic</span>
+<span class="cyan">AGENTS.md</span>                <span class="dim">tools + ritual</span>  <span class="cyan">tickets</span>         <span class="dim">exact repro commands</span>
+<span class="cyan">.github/skills/</span>          <span class="dim">procedures</span>
+</pre>
+  <ul class="points">
+    <li>Typed the same instruction twice? <b>It belongs in a file</b></li>
+    <li>Prompts are session-scoped. <b class="green">The harness compounds.</b></li>
+  </ul>
+  <p class="quote">Everything the agent did well just now,<br><b>a file taught it</b>.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Habits</b> · #7</div>
+  <h2><span class="green">Green</span> ≠ correct</h2>
+  <ul class="points">
+    <li>This suite is green. The code has <b class="red">three live bugs</b>.</li>
+    <li>Run the repro yourself</li>
+    <li>Make the agent prove the regression test <b>fails on the old code</b></li>
+    <li>Read every hunk of the diff</li>
+  </ul>
+  <p class="subtitle">Verify like your name is on the commit.<br><b>It is.</b></p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>Habits</b> · cheat sheet <span class="dim">- keep this open all afternoon</span></div>
+  <table style="font-size: 0.72em">
+    <tr><th>Trigger</th><th>Habit</th></tr>
+    <tr><td>New ticket</td><td>Fresh session, plan first, push back once</td></tr>
+    <tr><td>Unmade decision in the plan</td><td>Stop. Decide. Write the ADR</td></tr>
+    <tr><td>Plan &gt; ~5 steps</td><td>Split the ticket</td></tr>
+    <tr><td>Failed twice at the same thing</td><td><b>Reset with a tighter plan - stop prompting</b></td></tr>
+    <tr><td>Same instruction typed twice</td><td>Move it into the harness</td></tr>
+    <tr><td>Agent is guessing</td><td>Your feedback loop is too slow or flaky</td></tr>
+    <tr><td>"All tests pass"</td><td>Run the repro, read the diff</td></tr>
+    <tr><td>About to paste a wall of code</td><td>Hand over the key and let tooling fetch it</td></tr>
+  </table>
+  <p class="subtitle mono" style="font-size: 0.7em">docs/workshop/02-agentic-best-practices.md</p>
+</section>
+
+<!-- ══════════════ INTERSTITIAL 2 · ADR SKILL (2:20) ══════════════ -->
+
+<section class="slide">
+  <div class="kicker"><b>2:20</b> · interstitial</div>
+  <h1>Why stop<br><span class="accent">and write?</span></h1>
+  <p class="subtitle">The expensive failure isn't wrong code.<br>It's <b>right code implementing an undecided thing</b>.<br><br>ADR = the pushback artifact.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>2:20</b> · live</div>
+  <h2>Watch the terminal</h2>
+  <ul class="points">
+    <li>"Implement OPS-5" → the plan <b>halts</b>: "ADR-0008 required first"</li>
+    <li>The <b class="cyan">adr skill</b> drafts it - template, numbering, index row</li>
+    <li>We tighten the <b>Consequences</b> together <span class="dim">- an ADR with no downsides hasn't been thought through</span></li>
+    <li class="bad">We do <b>not</b> implement. That's your Exercise 5.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>2:20</b> · take-home</div>
+  <ul class="points" style="font-size: 1.2em">
+    <li><b>Instructions</b> tell the agent how to <span class="accent">behave</span></li>
+    <li><b>Skills</b> tell it how <span class="accent">we</span> do things</li>
+    <li><b>ADRs</b> tell it what we've <span class="accent">already decided</span></li>
+  </ul>
+  <p class="quote">All three are just files in the repo.<span class="dim">Start Monday.</span></p>
+</section>
+
+<!-- ══════════════ WRAP-UP (3:30) ══════════════ -->
+
+<section class="slide">
+  <div class="kicker"><b>3:30</b> · show &amp; tell</div>
+  <h2>Retro</h2>
+  <ul class="points">
+    <li>Where did <b>pushback</b> win?</li>
+    <li>Where did the agent surprise you - <span class="green">both</span> <span class="red">directions</span>?</li>
+    <li>Which of the nine habits did you violate, and what did it cost you?</li>
+    <li>Who did a two-strikes reset? How did it go?</li>
+    <li>Which file do you copy into your repo on <b>Monday</b>?</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><b>3:55</b> · cleanup &amp; thanks</div>
+  <h2>Before you go</h2>
+  <ul class="points">
+    <li>Delete your workshop Jira project <span class="dim">- your site, your mess</span></li>
+    <li>Keep the fork as a reference, or <code class="inline">gh repo delete</code></li>
+    <li>Take the harness home: instructions + AGENTS.md + one skill, adapted to your team</li>
+  </ul>
+  <p class="subtitle mono">github.com/scholtenmartijn/schiphol-cop-workshop<br>github.com/scholtenmartijn/schiphol-cop-demo</p>
+  <p class="quote">Ticket read. Code written. Tests green. PR open.<span class="dim">And you never left the terminal. Thank you!</span></p>
+</section>
+
+<div id="pager"></div>
+<div id="hint"><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>Home</kbd>/<kbd>End</kbd> jump · <kbd>F</kbd> fullscreen</div>
+<div class="nav-zone" id="zone-prev"></div>
+<div class="nav-zone" id="zone-next"></div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  let current = 0;
+
+  function show(index) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, i) => slide.classList.toggle("active", i === current));
+    document.getElementById("pager").textContent = (current + 1) + " / " + slides.length;
+    document.getElementById("progress").style.width = ((current + 1) / slides.length * 100) + "%";
+    history.replaceState(null, "", "#" + (current + 1));
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (["ArrowRight", " ", "PageDown", "Enter"].includes(event.key)) { show(current + 1); event.preventDefault(); }
+    else if (["ArrowLeft", "PageUp", "Backspace"].includes(event.key)) { show(current - 1); event.preventDefault(); }
+    else if (event.key === "Home") show(0);
+    else if (event.key === "End") show(slides.length - 1);
+    else if (event.key.toLowerCase() === "f") {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+  document.getElementById("zone-prev").addEventListener("click", () => show(current - 1));
+  document.getElementById("zone-next").addEventListener("click", () => show(current + 1));
+
+  const fromHash = parseInt(location.hash.slice(1), 10);
+  show(Number.isFinite(fromHash) ? fromHash - 1 : 0);
+</script>
+</body>
+</html>
