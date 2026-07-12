@@ -8,7 +8,8 @@ You'll work on **`schiphol-ops`**, a Python CLI for Schiphol airside operations,
 
 1. **[Setup](docs/workshop/00-setup.md)** - fork, clone, venv, `gh`/`acli` login, seed your tickets. *Do this before the workshop.*
 2. **[Participant guide](docs/workshop/01-participant-guide.md)** - the Jira → PR loop you'll repeat all afternoon.
-3. **[Exercises](docs/workshop/exercises/README.md)** - 3 bugs, 3 features, 2 stretch goals.
+3. **[Agentic engineering best practices](docs/workshop/02-agentic-best-practices.md)** - the nine habits behind the loop.
+4. **[Exercises](docs/workshop/exercises/README.md)** - 3 bugs, 3 features, 2 stretch goals.
 
 ## Agenda (≈4 hours)
 
@@ -17,7 +18,8 @@ You'll work on **`schiphol-ops`**, a Python CLI for Schiphol airside operations,
 | 0:00 | Welcome - Copilot customization: instructions, AGENTS.md, and **skills** |
 | 0:20 | Setup clinic - everyone to a green `check-setup.sh` |
 | 0:50 | Guided: Exercise 1 together, the full Jira → PR loop |
-| 1:20 | Self-paced: Exercises 2–4 |
+| 1:20 | Agentic engineering in practice - 9 habits before you fly solo |
+| 1:30 | Self-paced: Exercises 2–4 |
 | 2:20 | Break + demo: the **adr skill** (intro to Exercise 5) |
 | 2:35 | Self-paced: Exercises 5–6, stretch goals |
 | 3:30 | Show & tell, retro, Q&A |

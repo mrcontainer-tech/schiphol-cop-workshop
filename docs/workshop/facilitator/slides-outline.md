@@ -28,6 +28,16 @@ Builds on the deck from the 15-min talk (`schiphol-cop-demo/presentation/`); sli
 11. **Ground rules** - one ticket = one branch = one PR (on your fork). Bugs: reproduce first, regression test that fails on old code. The suite is green *and* the code has 3 bugs - trust tickets, not tests.
 12. **Go** - `./scripts/check-setup.sh` on screen; green → start the participant guide; red → hands up, floaters incoming.
 
+## Interstitial deck - agentic engineering (1:20, ~5 slides)
+
+Right after the guided exercise, before anyone flies solo. Full text: [`02-agentic-best-practices.md`](../02-agentic-best-practices.md) - the slides are pointers, the guide is the reference.
+
+- **Plan first, human decides** (#1, #2, #9) - "you just watched me push back on a correct plan; that reflex is the job." One line each: fresh session per ticket; decisions get written down before code (teaser for the 2:20 ADR demo).
+- **Two strikes, then reset** (#3) - the money slide. A failing thread is sunk cost: the context window now *contains a record of failure*, and it steers the next attempt. Kill it, restart with a tighter plan that encodes what you learned. Trigger phrase on screen: *"if you're negotiating with the chat, reset."*
+- **Small scoped tasks** (#4) - one ticket = one branch = one PR; plan longer than ~5 steps → split the ticket. "Today's tickets are pre-scoped; notice how that feels, then blame your backlog, not your model."
+- **Harness engineering** (#5, #6, #8) - this repo's file tree with the layers highlighted: instructions, AGENTS.md, skills, ADRs, sub-second tests, repro commands in tickets. "Everything the agent did well just now, a file taught it. Prompts are session-scoped; the harness compounds."
+- **Green ≠ correct** (#7) - "this suite is green and the code has three bugs. Verify like your name is on the commit, because it is." Cheat-sheet table as the closing slide; tell them to keep it open all afternoon.
+
 ## Interstitial deck - adr-skill demo (2:20, 2-3 slides or just live terminal)
 
 - **Why stop and write?** The expensive agent failure isn't wrong code, it's right code implementing an undecided thing. ADR = the pushback artifact.
@@ -38,4 +48,5 @@ Builds on the deck from the 15-min talk (`schiphol-cop-demo/presentation/`); sli
 
 - Show 2–3 PRs: a regression test, two competing ADR-0008s, a delay-report comment on a Jira ticket.
 - Retro: where did pushback win? where did the agent surprise you? which file do you copy into your repo on Monday?
+- Habits: which of the nine did you violate today, and what did it cost you? Who actually did a two-strikes reset, and how did it go?
 - Cleanup slide: delete Jira project, optionally the fork; links to demo repo + this repo.

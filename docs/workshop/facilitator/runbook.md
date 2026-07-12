@@ -32,7 +32,16 @@ Full loop, out loud, deliberately imperfect:
 5. `git diff` walk-through, then the **github skill**: branch, commit, `gh pr create` on your fork. Comment the PR on the ticket, transition it.
 6. The closer, same as the talk: *"Ticket read. Code written. Tests green. PR open, ticket updated - I never left the terminal."*
 
-### 1:20–2:20 - Self-paced: Exercises 2–4
+### 1:20–1:30 - Agentic engineering in practice
+
+Ten minutes, no laptop time: the [nine habits](../02-agentic-best-practices.md), anchored to what they just watched you do in the guided exercise. Don't lecture all nine; pick 4-5 live and point at the moments: "I pushed back on a fine plan - that's #1. I never pasted code, I gave it a ticket key - that's #8." The two must-tells before anyone flies solo:
+
+- **Two strikes, then reset (#3)** - give them explicit permission to kill a flailing session; most people treat a chat thread as sunk cost and prompt-nag for 20 minutes. Say the trigger phrase out loud: "if you're negotiating with the chat, reset."
+- **Harness engineering (#5)** - one slide of this repo's file tree with the instruction layers highlighted: "everything the agent did well just now, a file taught it."
+
+Close with the cheat-sheet table on screen and "it stays open in a tab all afternoon."
+
+### 1:30–2:20 - Self-paced: Exercises 2–4
 
 Announce: 2 and 3 are the bugs (do at least one), 4 is the feature breather; order free after that. Circulate - the [solutions](./solutions.md) hints are graded so you can unblock without spoiling. **Checkpoint 2:20: everyone has ≥1 merged-or-open PR; most have 2.** Anyone still fighting setup: pair them with a neighbour rather than losing them to config.
 
@@ -59,7 +68,7 @@ Pick 2–3 PRs on the projector - ideally: one clean regression test (Ex 2/3), o
 | Time | Everyone should have |
 |------|----------------------|
 | 0:50 | green `check-setup.sh` (or conscious gh-issues fallback) |
-| 1:20 | seen the full loop once, tickets seeded |
+| 1:30 | seen the full loop once + the nine habits, tickets seeded |
 | 2:20 | ≥1 PR open on their fork |
 | 3:30 | ≥2–3 PRs; Ex-5 people have an ADR-0008 |
 
@@ -70,6 +79,7 @@ Pick 2–3 PRs on the projector - ideally: one clean regression test (Ex 2/3), o
 | Participant's Jira/acli won't cooperate | `./scripts/seed-github-issues.sh` on their fork; tickets are identical. Don't debug Jira for >5 min. |
 | Copilot rate-limited / licence issues | Pair them with a neighbour - driver/navigator; swap on the next exercise. |
 | Agent's plan is bad on stage | Say so and redo it - "that's the lesson" (it genuinely is). |
+| Participant deep in a prompt-nagging spiral | Invoke habit #3 with them: kill the session together, write the tighter plan, restart. Two minutes, every time. |
 | Agent "fixes" a bug by editing `data/flights.json` | Point at AGENTS.md's last line on stage - best unplanned teaching moment available. |
 | Tests fail after an implement step | Read the failure with the room. Ask Copilot to fix. Resist typing. |
 | `gh pr create` flakes | `git push` and use the PR-URL hint from the push output in the browser; keep moving. |

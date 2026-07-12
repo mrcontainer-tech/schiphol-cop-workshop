@@ -2,6 +2,8 @@
 
 You'll run the same loop for every exercise. It's the loop from the talk, but this time *you're* driving. The point of the afternoon is not the Python - it's making this loop feel boring by the third repetition.
 
+The habits *behind* the loop (why plans come first, when to reset a session, what belongs in the repo instead of the prompt) live in the [best-practices guide](./02-agentic-best-practices.md); we'll walk them together right after the guided exercise.
+
 ## The loop
 
 ```
@@ -72,6 +74,8 @@ Skills are the new part: procedures with a trigger description, loaded only when
 
 ## Anti-patterns (a.k.a. how to have a bad afternoon)
 
+These are the *don'ts*; the [best-practices guide](./02-agentic-best-practices.md) has the *why* behind each one.
+
 - **Copy-pasting code between browser and IDE.** Give the agent the ticket key; context transfer is its job.
 - **Accepting the first plan silently.** The plan is a draft, and you're the senior engineer in the pair. Act like it.
 - **"It compiles, ship it."** Run the repro. Read the diff. The suite was green while three bugs sat in this codebase - let that sink in.
@@ -82,4 +86,5 @@ Skills are the new part: procedures with a trigger description, loaded only when
 
 1. Re-read the ticket - the answer is usually in the ACs or Notes.
 2. Ask the agent to explain the failing behavior before asking it to fix it.
-3. Wave. The host and floaters are there for exactly this.
+3. Agent failed twice at the same thing? Stop prompting. Reset the session with a tighter plan - [best practice #3](./02-agentic-best-practices.md#3-two-strikes-then-reset).
+4. Wave. The host and floaters are there for exactly this.
