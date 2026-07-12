@@ -1,33 +1,33 @@
 # schiphol-cop-workshop
 
-Hands-on workshop repository for the **Schiphol GitHub Copilot Community of Practice**: *from Jira ticket to pull request without leaving your IDE*. The sequel to the ["Jira to PR" talk](https://github.com/scholtenmartijn/schiphol-cop-demo) — this time, you drive.
+Hands-on workshop repository for the **Schiphol GitHub Copilot Community of Practice**: *from Jira ticket to pull request without leaving your IDE*. The sequel to the ["Jira to PR" talk](https://github.com/scholtenmartijn/schiphol-cop-demo) - this time, you drive.
 
-You'll work on **`schiphol-ops`**, a Python CLI for Schiphol airside operations, fixing real (planted) bugs and shipping features the way the tickets describe them — with GitHub Copilot in agent mode, `acli` for Jira, and `gh` for GitHub.
+You'll work on **`schiphol-ops`**, a Python CLI for Schiphol airside operations, fixing real (planted) bugs and shipping features the way the tickets describe them - with GitHub Copilot in agent mode, `acli` for Jira, and `gh` for GitHub.
 
 ## Start here
 
-1. **[Setup](docs/workshop/00-setup.md)** — fork, clone, venv, `gh`/`acli` login, seed your tickets. *Do this before the workshop.*
-2. **[Participant guide](docs/workshop/01-participant-guide.md)** — the Jira → PR loop you'll repeat all afternoon.
-3. **[Exercises](docs/workshop/exercises/README.md)** — 3 bugs, 3 features, 2 stretch goals.
+1. **[Setup](docs/workshop/00-setup.md)** - fork, clone, venv, `gh`/`acli` login, seed your tickets. *Do this before the workshop.*
+2. **[Participant guide](docs/workshop/01-participant-guide.md)** - the Jira → PR loop you'll repeat all afternoon.
+3. **[Exercises](docs/workshop/exercises/README.md)** - 3 bugs, 3 features, 2 stretch goals.
 
 ## Agenda (≈4 hours)
 
 | Time | Block |
 |------|-------|
-| 0:00 | Welcome — Copilot customization: instructions, AGENTS.md, and **skills** |
-| 0:20 | Setup clinic — everyone to a green `check-setup.sh` |
+| 0:00 | Welcome - Copilot customization: instructions, AGENTS.md, and **skills** |
+| 0:20 | Setup clinic - everyone to a green `check-setup.sh` |
 | 0:50 | Guided: Exercise 1 together, the full Jira → PR loop |
 | 1:20 | Self-paced: Exercises 2–4 |
 | 2:20 | Break + demo: the **adr skill** (intro to Exercise 5) |
 | 2:35 | Self-paced: Exercises 5–6, stretch goals |
 | 3:30 | Show & tell, retro, Q&A |
-| 3:55 | Cleanup — your Jira project, your fork |
+| 3:55 | Cleanup - your Jira project, your fork |
 
 ## The app
 
 ```
 $ schiphol-ops departures --terminal D
-DEPARTURES — Schiphol (AMS)
+DEPARTURES - Schiphol (AMS)
 
 FLIGHT    DESTINATION         GATE    SCHEDULED    STATUS
 KL1001    London (LHR)        D04     06:25        Departed
@@ -54,7 +54,7 @@ Python 3.11+, stdlib only, `pytest` for tests. Install: `pip install -e ".[dev]"
 src/schiphol_ops/        the CLI (cli / models / data / filters / board / gates / stats)
 data/                    one operational day: flights.json, gates.json
 tests/                   pytest suite + small fixture dataset
-docs/adr/                architecture decision records — agents read these first
+docs/adr/                architecture decision records - agents read these first
 docs/workshop/           setup, participant guide, exercises, facilitator material
 scripts/                 check-setup.sh, seed-jira.sh, seed-github-issues.sh
 .github/

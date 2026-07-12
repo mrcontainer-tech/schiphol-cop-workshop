@@ -16,10 +16,10 @@ acli jira workitem view <KEY> --json --fields '*all'
 ```
 
 From the JSON, extract and echo back before planning:
-1. **Summary** — what is being asked
-2. **Type** — Bug (reproduce first!) or Story (implement ACs)
-3. **Description** — repro steps for bugs, user story for features
-4. **Acceptance criteria** — each bullet becomes a test later
+1. **Summary** - what is being asked
+2. **Type** - Bug (reproduce first!) or Story (implement ACs)
+3. **Description** - repro steps for bugs, user story for features
+4. **Acceptance criteria** - each bullet becomes a test later
 
 ## Recipes
 
@@ -36,7 +36,7 @@ From the JSON, extract and echo back before planning:
 ## Workflow rituals
 
 - When starting work on a ticket: assign it to yourself and transition it to **In Progress**.
-- When the PR is open: comment on the ticket with the PR URL, then transition to **In Review** (or the closest status the project has — list options with `acli jira workitem transition --key <KEY>` if a status name is rejected).
+- When the PR is open: comment on the ticket with the PR URL, then transition to **In Review** (or the closest status the project has - list options with `acli jira workitem transition --key <KEY>` if a status name is rejected).
 - Multi-line comment bodies: write the text to a temp file and pass it with `--body "$(cat file.md)"`.
 
 ## Failure modes

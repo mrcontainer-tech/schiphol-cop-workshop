@@ -1,8 +1,8 @@
-# 0005 — Jira-keyed branches, commits, and PR titles
+# 0005 - Jira-keyed branches, commits, and PR titles
 
 ## Status
 
-Accepted — 2026-06-22
+Accepted - 2026-06-22
 
 ## Context
 
@@ -14,4 +14,4 @@ We will key every git artifact to the ticket: branches are `<ticket-key>-<slug>`
 
 ## Consequences
 
-`git log --oneline` reads as a ticket history, and reviewers can pull ticket context for any PR with one `acli` command. The convention is enforced socially and by the agent instructions, not by tooling — a wrong branch name is a review remark, not a blocked push.
+`git log --oneline` reads as a ticket history, and reviewers can pull ticket context for any PR with one `acli` command. The convention is enforced socially and by the agent instructions, not by tooling - a wrong branch name is a review remark, not a blocked push.

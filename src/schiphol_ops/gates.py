@@ -75,7 +75,7 @@ def render_gates(
     if not selected:
         return f"No gates found for pier {pier}."
     by_gate = occupancies_by_gate(flights)
-    lines = ["GATE OCCUPANCY — Schiphol (AMS)", ""]
+    lines = ["GATE OCCUPANCY - Schiphol (AMS)", ""]
     for gate in selected:
         slots = by_gate.get(gate.code, [])
         tags = "schengen" if gate.schengen else "non-schengen"

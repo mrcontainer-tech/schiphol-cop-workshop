@@ -11,7 +11,7 @@ from tests.conftest import make_flight
 
 def test_departures_board_has_title_and_headers(sample_flights):
     output = render_board(by_direction(sample_flights, Direction.DEPARTURE), Direction.DEPARTURE)
-    assert output.startswith("DEPARTURES — Schiphol (AMS)")
+    assert output.startswith("DEPARTURES - Schiphol (AMS)")
     assert "DESTINATION" in output
     assert "KL1001" in output
     assert "KL1002" not in output
@@ -19,7 +19,7 @@ def test_departures_board_has_title_and_headers(sample_flights):
 
 def test_arrivals_board_uses_origin_header(sample_flights):
     output = render_board(by_direction(sample_flights, Direction.ARRIVAL), Direction.ARRIVAL)
-    assert output.startswith("ARRIVALS — Schiphol (AMS)")
+    assert output.startswith("ARRIVALS - Schiphol (AMS)")
     assert "ORIGIN" in output
 
 
@@ -35,12 +35,12 @@ def test_delayed_flight_shows_delay_minutes():
 
 def test_footer_counts_delays_and_cancellations(sample_flights):
     output = render_board(sample_flights, Direction.DEPARTURE)
-    assert output.endswith("Showing 5 flights — 1 delayed, 0 cancelled")
+    assert output.endswith("Showing 5 flights - 1 delayed, 0 cancelled")
 
 
 def test_footer_uses_singular_for_one_flight():
     output = render_board([make_flight()], Direction.DEPARTURE)
-    assert "Showing 1 flight —" in output
+    assert "Showing 1 flight -" in output
 
 
 def test_render_detail_for_departure():

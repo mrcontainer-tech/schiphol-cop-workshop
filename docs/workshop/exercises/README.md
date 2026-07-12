@@ -1,8 +1,8 @@
 # Exercises
 
-Six tickets plus two stretch goals. Each file is the source of truth for a Jira ticket — `scripts/seed-jira.sh` creates them in your own Jira project (or `scripts/seed-github-issues.sh` creates them as GitHub issues on your fork). After seeding, `my-tickets.md` in the repo root maps each exercise to *your* ticket key.
+Six tickets plus two stretch goals. Each file is the source of truth for a Jira ticket - `scripts/seed-jira.sh` creates them in your own Jira project (or `scripts/seed-github-issues.sh` creates them as GitHub issues on your fork). After seeding, `my-tickets.md` in the repo root maps each exercise to *your* ticket key.
 
-Work them in order — Exercise 1 is the guided warm-up, and 2–4 can be done in any order after that. Every exercise follows the same loop, described in the [participant guide](../01-participant-guide.md).
+Work them in order - Exercise 1 is the guided warm-up, and 2–4 can be done in any order after that. Every exercise follows the same loop, described in the [participant guide](../01-participant-guide.md).
 
 | # | Ticket | Type | Difficulty | Est. | Skills in play |
 |---|--------|------|------------|------|----------------|
@@ -20,4 +20,4 @@ Ground rules:
 - **One ticket = one branch = one PR** against your own fork's `main`.
 - **Bugs:** reproduce before fixing, and ship a regression test that fails on the old code.
 - **Features:** every acceptance-criterion bullet gets a test.
-- The test suite is green when you clone — the bugs are real behavior, not red tests. Trust the tickets, not the suite.
+- The test suite is green when you clone - the bugs are real behavior, not red tests. Trust the tickets, not the suite.

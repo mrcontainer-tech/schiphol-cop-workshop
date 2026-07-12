@@ -1,8 +1,8 @@
-# 0001 — Python 3.11+ with stdlib only at runtime
+# 0001 - Python 3.11+ with stdlib only at runtime
 
 ## Status
 
-Accepted — 2026-06-15
+Accepted - 2026-06-15
 
 ## Context
 
@@ -14,4 +14,4 @@ We will target Python 3.11+ and keep the runtime dependency list empty. `pytest`
 
 ## Consequences
 
-Setup is `python -m venv` + one editable install, and it works offline once cloned. Table rendering, time math, and JSON parsing are hand-rolled, which costs some code but makes every behavior traceable — useful in a workshop where participants read unfamiliar code under time pressure. If a ticket genuinely needs a runtime dependency, that's a new ADR superseding this one.
+Setup is `python -m venv` + one editable install, and it works offline once cloned. Table rendering, time math, and JSON parsing are hand-rolled, which costs some code but makes every behavior traceable - useful in a workshop where participants read unfamiliar code under time pressure. If a ticket genuinely needs a runtime dependency, that's a new ADR superseding this one.

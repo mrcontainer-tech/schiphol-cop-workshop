@@ -1,8 +1,8 @@
-# 0004 — Layered Copilot instructions
+# 0004 - Layered Copilot instructions
 
 ## Status
 
-Accepted — 2026-06-22
+Accepted - 2026-06-22
 
 ## Context
 
@@ -10,7 +10,7 @@ Copilot reads guidance from several places, and it's tempting to dump everything
 
 ## Decision
 
-We will layer instructions by scope: [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md) for repo-wide collaboration policy (always loaded), [`.github/instructions/*.instructions.md`](../../.github/instructions/) with `applyTo` globs for per-path conventions (Python style, test style), [`AGENTS.md`](../../AGENTS.md) for agent-mode tool permissions and the change ritual, and [`.github/skills/`](../../.github/skills/) for on-demand procedures (see ADR-0007). Each rule lives in exactly one layer. The alternative — a single instructions file — was rejected as unscalable and pedagogically useless.
+We will layer instructions by scope: [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md) for repo-wide collaboration policy (always loaded), [`.github/instructions/*.instructions.md`](../../.github/instructions/) with `applyTo` globs for per-path conventions (Python style, test style), [`AGENTS.md`](../../AGENTS.md) for agent-mode tool permissions and the change ritual, and [`.github/skills/`](../../.github/skills/) for on-demand procedures (see ADR-0007). Each rule lives in exactly one layer. The alternative - a single instructions file - was rejected as unscalable and pedagogically useless.
 
 ## Consequences
 

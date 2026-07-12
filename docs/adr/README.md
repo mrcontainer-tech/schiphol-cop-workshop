@@ -1,8 +1,8 @@
 # Architecture Decision Records
 
-Short, append-only notes on the decisions we made and the trade-offs we accepted. New records get the next sequential number; accepted records are never edited in spirit — if a decision changes, write a new ADR that **supersedes** the old one and flip only the old record's Status line.
+Short, append-only notes on the decisions we made and the trade-offs we accepted. New records get the next sequential number; accepted records are never edited in spirit - if a decision changes, write a new ADR that **supersedes** the old one and flip only the old record's Status line.
 
-Format: [Nygard-style](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) — Status / Context / Decision / Consequences. Keep it under a page. The **adr skill** ([`.github/skills/adr/`](../../.github/skills/adr/SKILL.md)) walks agents through writing one.
+Format: [Nygard-style](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) - Status / Context / Decision / Consequences. Keep it under a page. The **adr skill** ([`.github/skills/adr/`](../../.github/skills/adr/SKILL.md)) walks agents through writing one.
 
 Both engineers and agents should read this index before making non-trivial changes. If your change contradicts a record here, write a new ADR first.
 

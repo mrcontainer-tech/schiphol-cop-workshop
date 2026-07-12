@@ -1,10 +1,10 @@
-# Copilot — repository instructions
+# Copilot - repository instructions
 
 These instructions apply to every Copilot session in this repo. They describe how Copilot should collaborate on changes, regardless of language or folder.
 
 ## What this repo is
 
-`schiphol-ops` — a Schiphol airside operations CLI (departures, arrivals, gates, stats, search). It is the hands-on codebase for the **"Jira to PR" workshop** at the Schiphol GitHub Copilot Community of Practice. Participants pull a ticket from Jira, implement it with Copilot, and open a PR — end to end from the IDE.
+`schiphol-ops` - a Schiphol airside operations CLI (departures, arrivals, gates, stats, search). It is the hands-on codebase for the **"Jira to PR" workshop** at the Schiphol GitHub Copilot Community of Practice. Participants pull a ticket from Jira, implement it with Copilot, and open a PR - end to end from the IDE.
 
 ## How to work
 
@@ -21,7 +21,7 @@ These instructions apply to every Copilot session in this repo. They describe ho
 Branching, commits, and PRs follow the **github skill** (`.github/skills/github/`). In short:
 
 - Branch from `main`, named `<ticket-key>-<slug>` (e.g. `ops-1-destination-filter`).
-- Conventional commit titles: `feat: …`, `fix: …`, `docs: …`, `test: …`, `chore: …` — with the ticket key in the message.
+- Conventional commit titles: `feat: …`, `fix: …`, `docs: …`, `test: …`, `chore: …` - with the ticket key in the message.
 - PR title: `<TICKET-KEY>: <short summary>`. PR body follows [`.github/pull_request_template.md`](./pull_request_template.md).
 - Run `pytest` and confirm green before opening a PR.
 - Never `git push --force`. Never commit secrets, credentials, or `.env` files.
@@ -30,4 +30,4 @@ Branching, commits, and PRs follow the **github skill** (`.github/skills/github/
 
 - Do not bypass branch protection (`gh pr merge --admin`, `--force`, etc.).
 - Do not run destructive `git` commands (`reset --hard`, `clean -fdx`) without explicit confirmation.
-- If a tool is missing on the host, surface it — do not silently install global packages.
+- If a tool is missing on the host, surface it - do not silently install global packages.

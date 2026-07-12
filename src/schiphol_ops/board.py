@@ -8,8 +8,8 @@ _HEADERS = {
 }
 
 _TITLES = {
-    Direction.DEPARTURE: "DEPARTURES — Schiphol (AMS)",
-    Direction.ARRIVAL: "ARRIVALS — Schiphol (AMS)",
+    Direction.DEPARTURE: "DEPARTURES - Schiphol (AMS)",
+    Direction.ARRIVAL: "ARRIVALS - Schiphol (AMS)",
 }
 
 EMPTY_MESSAGE = "No flights match the given filters."
@@ -42,7 +42,7 @@ def _footer(flights: list[Flight]) -> str:
     delayed = sum(1 for f in flights if f.is_delayed)
     cancelled = sum(1 for f in flights if f.is_cancelled)
     noun = "flight" if len(flights) == 1 else "flights"
-    return f"Showing {len(flights)} {noun} — {delayed} delayed, {cancelled} cancelled"
+    return f"Showing {len(flights)} {noun} - {delayed} delayed, {cancelled} cancelled"
 
 
 def render_board(flights: list[Flight], direction: Direction) -> str:

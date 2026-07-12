@@ -1,4 +1,4 @@
-# Exercise 6 — Delay report that posts back to Jira
+# Exercise 6 - Delay report that posts back to Jira
 
 **Type:** Story
 **Priority:** Medium
@@ -10,12 +10,12 @@
 
 As a duty manager, I want a ready-to-paste Markdown report of the worst delays, so I can drop the current situation into tickets and chat channels without retyping numbers.
 
-The output should be a self-contained Markdown snippet — and to prove it works, the last step of this ticket is posting the generated report back onto **this very Jira ticket** as a comment, straight from the terminal.
+The output should be a self-contained Markdown snippet - and to prove it works, the last step of this ticket is posting the generated report back onto **this very Jira ticket** as a comment, straight from the terminal.
 
 Expected shape:
 
 ```markdown
-## Delay report — Schiphol (AMS)
+## Delay report - Schiphol (AMS)
 
 | Flight | Type      | City                | Scheduled | Delay |
 |--------|-----------|---------------------|-----------|-------|
@@ -37,5 +37,5 @@ Expected shape:
 
 ## Notes
 
-- The totals line should use the (fixed) stats logic from Exercise 2 — if you haven't done Exercise 2, the averages will look funny; that's fine, note it in the PR.
+- The totals line should use the (fixed) stats logic from Exercise 2 - if you haven't done Exercise 2, the averages will look funny; that's fine, note it in the PR.
 - Markdown assembly is rendering: it belongs next to (not inside) the board rendering, per ADR-0002.

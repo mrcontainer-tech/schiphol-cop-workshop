@@ -12,12 +12,12 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 EXERCISES_DIR="$REPO_ROOT/docs/workshop/exercises"
 MAPPING_FILE="$REPO_ROOT/my-tickets.md"
 
-command -v gh >/dev/null 2>&1 || { echo "gh not found — install from https://cli.github.com" >&2; exit 1; }
-gh auth status >/dev/null 2>&1 || { echo "gh not authenticated — run: gh auth login" >&2; exit 1; }
+command -v gh >/dev/null 2>&1 || { echo "gh not found - install from https://cli.github.com" >&2; exit 1; }
+gh auth status >/dev/null 2>&1 || { echo "gh not authenticated - run: gh auth login" >&2; exit 1; }
 
 repo="$(cd "$REPO_ROOT" && gh repo view --json nameWithOwner --jq .nameWithOwner)"
 if [ "$repo" = "scholtenmartijn/schiphol-cop-workshop" ]; then
-    echo "origin is the upstream workshop repo — fork it first: gh repo fork --clone" >&2
+    echo "origin is the upstream workshop repo - fork it first: gh repo fork --clone" >&2
     exit 1
 fi
 
@@ -35,7 +35,7 @@ printf 'Continue? [y/N] '
 read -r answer
 case "$answer" in y|Y|yes|YES) ;; *) echo "aborted."; exit 0 ;; esac
 
-# Forks are created without issues enabled more often than not — flip it on.
+# Forks are created without issues enabled more often than not - flip it on.
 gh repo edit "$repo" --enable-issues >/dev/null 2>&1 || true
 gh label create bug --repo "$repo" --color d73a4a >/dev/null 2>&1 || true
 gh label create feature --repo "$repo" --color a2eeef >/dev/null 2>&1 || true
@@ -51,8 +51,8 @@ gh label create feature --repo "$repo" --color a2eeef >/dev/null 2>&1 || true
 
 for f in "${files[@]}"; do
     title="$(head -1 "$f" | sed 's/^# //')"
-    summary="${title#* — }"
-    exercise="${title% — *}"
+    summary="${title#* - }"
+    exercise="${title% - *}"
     type="$(grep -m1 '^\*\*Type:\*\*' "$f" | sed 's/^\*\*Type:\*\* *//' | tr -d '[:space:]')"
     label="feature"
     [ "$type" = "Bug" ] && label="bug"

@@ -50,7 +50,7 @@ def test_overlapping_flights_at_same_gate_conflict():
 
 
 def test_back_to_back_flights_do_not_conflict():
-    # First window ends 10:10, second starts 10:10 — a legal tight turnaround.
+    # First window ends 10:10, second starts 10:10 - a legal tight turnaround.
     flights = [
         make_flight(number="KL0001", gate="D04", scheduled=time(10, 0)),
         make_flight(number="KL0002", gate="D04", scheduled=time(10, 55)),

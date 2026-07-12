@@ -25,8 +25,8 @@ if [ -z "$PROJECT" ]; then
     exit 2
 fi
 
-command -v acli >/dev/null 2>&1 || { echo "acli not found — see docs/workshop/00-setup.md" >&2; exit 1; }
-acli jira auth status >/dev/null 2>&1 || { echo "acli not authenticated — run: acli jira auth login" >&2; exit 1; }
+command -v acli >/dev/null 2>&1 || { echo "acli not found - see docs/workshop/00-setup.md" >&2; exit 1; }
+acli jira auth status >/dev/null 2>&1 || { echo "acli not authenticated - run: acli jira auth login" >&2; exit 1; }
 
 files=()
 for f in "$EXERCISES_DIR"/exercise-*.md "$EXERCISES_DIR"/stretch-*.md; do
@@ -53,8 +53,8 @@ case "$answer" in y|Y|yes|YES) ;; *) echo "aborted."; exit 0 ;; esac
 
 for f in "${files[@]}"; do
     title="$(head -1 "$f" | sed 's/^# //')"
-    summary="${title#* — }"
-    exercise="${title% — *}"
+    summary="${title#* - }"
+    exercise="${title% - *}"
     type="$(grep -m1 '^\*\*Type:\*\*' "$f" | sed 's/^\*\*Type:\*\* *//' | tr -d '[:space:]')"
     [ -n "$type" ] || type="Task"
     description="$(tail -n +2 "$f")"
@@ -71,7 +71,7 @@ for f in "${files[@]}"; do
             --type "Task" \
             --summary "$summary" \
             --description "$description" 2>&1)"; then
-        echo "  (work item type '$type' not available — created as Task)"
+        echo "  (work item type '$type' not available - created as Task)"
     else
         echo "  FAILED: $output" >&2
         echo "| $exercise | (failed) | $summary |" >> "$MAPPING_FILE"
@@ -79,7 +79,7 @@ for f in "${files[@]}"; do
     fi
 
     key="$(printf '%s' "$output" | grep -oE "$PROJECT-[0-9]+" | head -1)"
-    [ -n "$key" ] || key="(created — key not parsed)"
+    [ -n "$key" ] || key="(created - key not parsed)"
     echo "  -> $key"
     echo "| $exercise | $key | $summary |" >> "$MAPPING_FILE"
 done

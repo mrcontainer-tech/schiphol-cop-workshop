@@ -1,4 +1,4 @@
-# Exercise 2 — Operations summary reports impossible numbers
+# Exercise 2 - Operations summary reports impossible numbers
 
 **Type:** Bug
 **Priority:** Highest
@@ -12,9 +12,9 @@ The duty manager uses `schiphol-ops stats` for the morning briefing and stopped 
 
 ```
 $ schiphol-ops stats
-OPERATIONS SUMMARY — Schiphol (AMS)
+OPERATIONS SUMMARY - Schiphol (AMS)
 
-Overall: 55 flights — 46 on time, 9 delayed, 3 cancelled, avg delay 7m, on-time 88%
+Overall: 55 flights - 46 on time, 9 delayed, 3 cancelled, avg delay 7m, on-time 88%
 ```
 
 Two things can't be right:
@@ -26,8 +26,8 @@ The same wrong numbers show up in every `--by airline` / `--by terminal` breakdo
 
 ## Steps to reproduce
 
-1. `schiphol-ops stats` — note `46 on time` and `avg delay 7m`.
-2. `schiphol-ops departures --status delayed` and `schiphol-ops arrivals --status delayed` — add up the delays yourself: 9 flights, average ≈ 40m.
+1. `schiphol-ops stats` - note `46 on time` and `avg delay 7m`.
+2. `schiphol-ops departures --status delayed` and `schiphol-ops arrivals --status delayed` - add up the delays yourself: 9 flights, average ≈ 40m.
 3. Note that on time (46) + delayed (9) + cancelled (3) exceeds the total (55).
 
 ## Acceptance criteria
@@ -39,5 +39,5 @@ The same wrong numbers show up in every `--by airline` / `--by terminal` breakdo
 
 ## Notes
 
-- The on-time percentage is defined over operated flights (total minus cancelled) — that part is believed correct; don't change its definition, make its inputs right.
+- The on-time percentage is defined over operated flights (total minus cancelled) - that part is believed correct; don't change its definition, make its inputs right.
 - Existing tests are green, so whatever you add must expose the current behavior before your fix.

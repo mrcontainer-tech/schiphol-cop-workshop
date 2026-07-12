@@ -12,7 +12,7 @@ ok()   { printf '  \033[32m✓\033[0m %s\n' "$1"; PASS=$((PASS + 1)); }
 bad()  { printf '  \033[31m✗\033[0m %s\n' "$1"; FAIL=$((FAIL + 1)); }
 note() { printf '  \033[33m·\033[0m %s\n' "$1"; }
 
-echo "schiphol-cop-workshop — setup check"
+echo "schiphol-cop-workshop - setup check"
 echo
 
 echo "Python"
@@ -34,15 +34,15 @@ if [ -x ".venv/bin/python" ] || [ -x ".venv/Scripts/python.exe" ]; then
     if "$VENV_PY" -c 'import schiphol_ops' >/dev/null 2>&1; then
         ok "schiphol-ops installed in .venv"
     else
-        bad "schiphol-ops not importable — run: source .venv/bin/activate && pip install -e \".[dev]\""
+        bad "schiphol-ops not importable - run: source .venv/bin/activate && pip install -e \".[dev]\""
     fi
     if "$VENV_PY" -m pytest -q >/dev/null 2>&1; then
         ok "pytest green"
     else
-        bad "pytest failing — that's not how this repo ships; check your install"
+        bad "pytest failing - that's not how this repo ships; check your install"
     fi
 else
-    bad ".venv missing — run: python3 -m venv .venv && source .venv/bin/activate && pip install -e \".[dev]\""
+    bad ".venv missing - run: python3 -m venv .venv && source .venv/bin/activate && pip install -e \".[dev]\""
 fi
 
 echo
@@ -58,16 +58,16 @@ if command -v gh >/dev/null 2>&1; then
     if gh auth status >/dev/null 2>&1; then
         ok "gh authenticated"
     else
-        bad "gh not authenticated — run: gh auth login"
+        bad "gh not authenticated - run: gh auth login"
     fi
     origin="$(git remote get-url origin 2>/dev/null || true)"
     if [ -n "$origin" ] && ! printf '%s' "$origin" | grep -q "scholtenmartijn/schiphol-cop-workshop"; then
         ok "working on a fork ($origin)"
     else
-        note "origin looks like the upstream repo — did you fork? (gh repo fork --clone)"
+        note "origin looks like the upstream repo - did you fork? (gh repo fork --clone)"
     fi
 else
-    bad "gh not found — install from https://cli.github.com"
+    bad "gh not found - install from https://cli.github.com"
 fi
 
 echo
@@ -77,21 +77,21 @@ if command -v acli >/dev/null 2>&1; then
     if acli jira auth status >/dev/null 2>&1; then
         ok "acli authenticated"
     else
-        bad "acli not authenticated — run: acli jira auth login"
+        bad "acli not authenticated - run: acli jira auth login"
     fi
 else
-    bad "acli not found — see docs/workshop/00-setup.md (GitHub Issues fallback exists)"
+    bad "acli not found - see docs/workshop/00-setup.md (GitHub Issues fallback exists)"
 fi
 
 echo
 echo "Copilot"
-note "can't be checked from a script — confirm the Copilot extension is installed,"
+note "can't be checked from a script - confirm the Copilot extension is installed,"
 note "you're signed in, agent mode opens, and the extension is up to date (agent skills need a recent version)."
 
 echo
 if [ "$FAIL" -eq 0 ]; then
-    printf '\033[32mAll %d checks passed — see you at the workshop.\033[0m\n' "$PASS"
+    printf '\033[32mAll %d checks passed - see you at the workshop.\033[0m\n' "$PASS"
 else
-    printf '\033[31m%d check(s) failed\033[0m (%d passed) — fix the ✗ lines above, docs/workshop/00-setup.md has the details.\n' "$FAIL" "$PASS"
+    printf '\033[31m%d check(s) failed\033[0m (%d passed) - fix the ✗ lines above, docs/workshop/00-setup.md has the details.\n' "$FAIL" "$PASS"
     exit 1
 fi

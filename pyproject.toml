@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "schiphol-ops"
 version = "0.1.0"
-description = "Schiphol airside operations CLI — workshop codebase for the 'Jira to PR' hands-on session."
+description = "Schiphol airside operations CLI - workshop codebase for the 'Jira to PR' hands-on session."
 requires-python = ">=3.11"
 authors = [{ name = "Martijn Scholten" }]
 dependencies = []

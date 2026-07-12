@@ -7,7 +7,7 @@ description: Branch, commit, and open pull requests with the gh CLI following th
 
 Ship reviewed work from ticket to pull request without leaving the terminal.
 
-## Preconditions — check before opening a PR
+## Preconditions - check before opening a PR
 
 1. `pytest` is green.
 2. The manual repro/demo command from the ticket shows the intended behavior.
@@ -33,7 +33,7 @@ Commit types: `feat:` new behavior · `fix:` bug fix · `test:` tests only · `d
 
 ## PR body
 
-Follow [`.github/pull_request_template.md`](../../pull_request_template.md): a `Closes <KEY>` line, a 1-2 sentence summary, the ticket's acceptance criteria as checked boxes, and a test plan (pytest + the manual command you ran). Write the body to a temp file and pass `--body-file` — don't fight shell quoting.
+Follow [`.github/pull_request_template.md`](../../pull_request_template.md): a `Closes <KEY>` line, a 1-2 sentence summary, the ticket's acceptance criteria as checked boxes, and a test plan (pytest + the manual command you ran). Write the body to a temp file and pass `--body-file` - don't fight shell quoting.
 
 ## Inspecting
 

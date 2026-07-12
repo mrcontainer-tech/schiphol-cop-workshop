@@ -55,14 +55,14 @@ def grouped_summaries(flights: list[Flight], by: str) -> dict[str, Summary]:
 
 def _summary_line(summary: Summary) -> str:
     return (
-        f"{summary.total} flights — {summary.on_time} on time, "
+        f"{summary.total} flights - {summary.on_time} on time, "
         f"{summary.delayed} delayed, {summary.cancelled} cancelled, "
         f"avg delay {summary.avg_delay}m, on-time {summary.on_time_pct}%"
     )
 
 
 def render_stats(flights: list[Flight], by: str | None = None) -> str:
-    lines = ["OPERATIONS SUMMARY — Schiphol (AMS)", ""]
+    lines = ["OPERATIONS SUMMARY - Schiphol (AMS)", ""]
     lines.append(f"Overall: {_summary_line(summarize(flights))}")
     if by is not None:
         lines.append("")

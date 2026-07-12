@@ -1,12 +1,12 @@
-# 0003 — JSON files as the only data source
+# 0003 - JSON files as the only data source
 
 ## Status
 
-Accepted — 2026-06-15
+Accepted - 2026-06-15
 
 ## Context
 
-The CLI needs a full day of plausible Schiphol flight and gate data. A real API (Schiphol publishes one) requires keys, network, and rate limits — all workshop hazards. A database adds setup and hides the data from casual reading.
+The CLI needs a full day of plausible Schiphol flight and gate data. A real API (Schiphol publishes one) requires keys, network, and rate limits - all workshop hazards. A database adds setup and hides the data from casual reading.
 
 ## Decision
 
@@ -14,4 +14,4 @@ We will ship the dataset as `data/flights.json` and `data/gates.json`, loaded by
 
 ## Consequences
 
-The whole world state is two human-readable files — participants can open them to check what a command *should* print, which is exactly how bug tickets here are verified. Deterministic data means deterministic outputs. The single-day model can't express date rollovers; if a ticket ever needs real timestamps, that supersedes this record.
+The whole world state is two human-readable files - participants can open them to check what a command *should* print, which is exactly how bug tickets here are verified. Deterministic data means deterministic outputs. The single-day model can't express date rollovers; if a ticket ever needs real timestamps, that supersedes this record.

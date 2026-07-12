@@ -8,7 +8,7 @@ from schiphol_ops.cli import main
 def test_departures_shows_only_departures(cli_data, capsys):
     assert main(["departures"]) == 0
     output = capsys.readouterr().out
-    assert "DEPARTURES — Schiphol (AMS)" in output
+    assert "DEPARTURES - Schiphol (AMS)" in output
     assert "KL1001" in output
     assert "DL0046" not in output
 
@@ -16,7 +16,7 @@ def test_departures_shows_only_departures(cli_data, capsys):
 def test_arrivals_shows_only_arrivals(cli_data, capsys):
     assert main(["arrivals"]) == 0
     output = capsys.readouterr().out
-    assert "ARRIVALS — Schiphol (AMS)" in output
+    assert "ARRIVALS - Schiphol (AMS)" in output
     assert "DL0046" in output
     assert "KL1001" not in output
 
@@ -32,7 +32,7 @@ def test_departures_status_filter(cli_data, capsys):
     assert main(["departures", "--status", "delayed"]) == 0
     output = capsys.readouterr().out
     assert "KL0643" in output
-    assert "Showing 1 flight —" in output
+    assert "Showing 1 flight -" in output
 
 
 def test_departures_airline_filter_accepts_lowercase(cli_data, capsys):

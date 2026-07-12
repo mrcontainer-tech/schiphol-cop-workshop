@@ -1,4 +1,4 @@
-# Stretch A — Suggest a free gate for conflicted flights
+# Stretch A - Suggest a free gate for conflicted flights
 
 **Type:** Story
 **Priority:** Low
@@ -21,5 +21,5 @@ As a ramp planner, when `gates --conflicts` flags a double-booking, I want the t
 
 ## Notes
 
-- Requires a working Exercise 3 fix — suggestions built on a conflict list that misses conflicts would be actively dangerous. Say so in the PR if you stacked the branches.
+- Requires a working Exercise 3 fix - suggestions built on a conflict list that misses conflicts would be actively dangerous. Say so in the PR if you stacked the branches.
 - "Free" means: no occupancy overlap with any flight at the candidate gate, using the same overlap rule the conflict check uses.

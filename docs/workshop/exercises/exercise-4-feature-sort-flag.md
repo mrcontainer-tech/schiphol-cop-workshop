@@ -1,4 +1,4 @@
-# Exercise 4 — Sort the boards by destination or delay
+# Exercise 4 - Sort the boards by destination or delay
 
 **Type:** Story
 **Priority:** Medium
@@ -23,5 +23,5 @@ Today both boards always print in scheduled-time order. During this morning's fo
 
 ## Notes
 
-- Sorting is flight *selection/ordering* logic — it belongs in `filters.py` (or a sibling pure function), not in `board.py` rendering and not inline in `cli.py` (see ADR-0002).
+- Sorting is flight *selection/ordering* logic - it belongs in `filters.py` (or a sibling pure function), not in `board.py` rendering and not inline in `cli.py` (see ADR-0002).
 - The flag applies to boards only; `gates`, `stats`, and `search` are out of scope.

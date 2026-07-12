@@ -12,7 +12,7 @@ applyTo: "**/*.py"
 - Domain models live in `models.py` as `@dataclass(frozen=True)`. Do not add ORM or pydantic.
 - Pure functions everywhere except the CLI: `filters.py`, `board.py`, `gates.py`, and `stats.py` return values, never print.
 - All `print` lives in `cli.py` (and `__main__.py`). Libraries return strings; the CLI prints them.
-- Argparse only — no `click`, `typer`, or other CLI libs.
+- Argparse only - no `click`, `typer`, or other CLI libs.
 
 ## Style
 - Functions short, single-purpose. No unnecessary classes.
