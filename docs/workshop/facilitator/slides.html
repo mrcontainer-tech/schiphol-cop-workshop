@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jira → PR - Schiphol Copilot CoP Workshop</title>
+<title>Issue → PR - Schiphol Copilot CoP Workshop</title>
 <style>
   :root {
     --bg: #1a1b26;
@@ -170,7 +170,7 @@
 
 <section class="slide">
   <div class="kicker"><b>Schiphol Copilot CoP</b> · workshop edition</div>
-  <h1>Jira → PR<br><span class="accent">this time, you drive.</span></h1>
+  <h1>Issue → PR<br><span class="accent">this time, you drive.</span></h1>
   <p class="subtitle">Martijn Scholten<br>
   <span class="mono">github.com/scholtenmartijn/schiphol-cop-workshop</span></p>
 </section>
@@ -179,7 +179,7 @@
   <div class="kicker"><b>Welcome</b> · last time, in 15 minutes</div>
   <h2>Where we left off</h2>
   <ul class="points">
-    <li class="good">Ticket read <span class="dim">- acli, not a browser</span></li>
+    <li class="good">Issue read <span class="dim">- acli or gh, not a browser</span></li>
     <li class="good">Code written <span class="dim">- agent typed, human steered</span></li>
     <li class="good">Tests green</li>
     <li class="good">PR open and linked</li>
@@ -189,17 +189,17 @@
 
 <section class="slide">
   <div class="kicker"><b>Welcome</b> · today's contract</div>
-  <h2>The next four hours</h2>
+  <h2>The next three hours</h2>
   <table>
     <tr><th>Time</th><th>Block</th></tr>
     <tr><td>0:00</td><td>How a repo steers an agent: instructions, AGENTS.md, <b>skills</b></td></tr>
-    <tr><td>0:20</td><td>Setup clinic - everyone to a green <code class="inline">check-setup.sh</code></td></tr>
-    <tr><td>0:50</td><td>Guided: Exercise 1 together, the full loop</td></tr>
-    <tr><td>1:20</td><td>Agentic engineering - 9 habits before you fly solo</td></tr>
-    <tr><td>1:30</td><td>Self-paced: Exercises 2-4</td></tr>
-    <tr><td>2:20</td><td>Break + the <b>adr skill</b>, live</td></tr>
-    <tr><td>2:35</td><td>Self-paced: Exercises 5-6 + stretch</td></tr>
-    <tr><td>3:30</td><td>Show &amp; tell · retro · cleanup</td></tr>
+    <tr><td>0:15</td><td>Setup clinic - everyone to a green <code class="inline">check-setup.sh</code></td></tr>
+    <tr><td>0:40</td><td>Guided: Exercise 1 together, the full loop</td></tr>
+    <tr><td>1:05</td><td>Agentic engineering - 9 habits before you fly solo</td></tr>
+    <tr><td>1:15</td><td>Self-paced: Exercises 2-4</td></tr>
+    <tr><td>1:55</td><td>Break + the <b>adr skill</b>, live</td></tr>
+    <tr><td>2:10</td><td>Self-paced: Exercises 5-6 + stretch</td></tr>
+    <tr><td>2:50</td><td>Show &amp; tell · retro · cleanup</td></tr>
   </table>
 </section>
 
@@ -208,11 +208,11 @@
   <h2>What you'll be flying</h2>
   <ul class="points">
     <li><b>GitHub Copilot</b> in agent mode - any IDE you like</li>
-    <li><code class="inline">acli</code> - Jira from the terminal</li>
-    <li><code class="inline">gh</code> - GitHub from the terminal</li>
+    <li><code class="inline">acli</code> - Jira from the terminal <span class="dim">- or…</span></li>
+    <li><code class="inline">gh</code> - GitHub from the terminal, PRs <b>and</b> Issues</li>
     <li><code class="inline">schiphol-ops</code> - a ~600-line Python CLI: departures, arrivals, gates, stats</li>
   </ul>
-  <p class="subtitle">Nobody needs to be a Python expert.<br>The agent writes Python. <b class="green">You supervise engineering.</b></p>
+  <p class="subtitle">Track work in <b class="cyan">Jira</b> or in <b class="cyan">GitHub Issues</b> - your choice.<br>The agent writes Python. <b class="green">You supervise engineering.</b></p>
 </section>
 
 <!-- ══════════════ PART 2 · STEERING (slides 5-9) ══════════════ -->
@@ -261,10 +261,10 @@ acli jira workitem view &lt;KEY&gt; --json --fields '*all'
   <h2>The skills you'll use</h2>
   <ul class="points">
     <li><b class="cyan">jira</b> - tickets in and out of the terminal: view, assign, comment, transition</li>
-    <li><b class="cyan">github</b> - branch → conventional commit → templated PR, checks</li>
+    <li><b class="cyan">github</b> - branch → conventional commit → templated PR, checks <span class="dim">- plus GitHub Issues, so <code class="inline">gh</code> alone can run the whole loop without Jira</span></li>
     <li><b class="cyan">adr</b> - decide <i>before</i> you code, in writing</li>
   </ul>
-  <p class="subtitle">Exercise 5 will refuse to let you code before the ADR exists.<br><b>On purpose.</b></p>
+  <p class="subtitle">Pick your tracker: <b class="cyan">jira</b> or <b class="cyan">github</b> issues - the loop is the same.<br>Exercise 5 will refuse to let you code before the ADR exists. <b>On purpose.</b></p>
 </section>
 
 <section class="slide">
@@ -285,7 +285,7 @@ acli jira workitem view &lt;KEY&gt; --json --fields '*all'
   <h2>What you'll repeat all afternoon</h2>
   <div class="cols">
     <div><ul class="points">
-      <li><b>1.</b> Pull the ticket <span class="dim">(jira skill)</span></li>
+      <li><b>1.</b> Pull the issue <span class="dim">(jira <i>or</i> github skill)</span></li>
       <li><b>2.</b> Reproduce the bug first</li>
       <li><b>3.</b> Plan - <b class="red">push back, every time</b></li>
       <li><b>4.</b> Implement <span class="dim">(agent types)</span></li>
@@ -294,7 +294,7 @@ acli jira workitem view &lt;KEY&gt; --json --fields '*all'
       <li><b>5.</b> Verify: pytest + repro</li>
       <li><b>6.</b> Read the whole diff</li>
       <li><b>7.</b> PR <span class="dim">(github skill)</span></li>
-      <li><b>8.</b> Close the loop in Jira</li>
+      <li><b>8.</b> Close the loop in Jira <span class="dim">or the GitHub issue</span></li>
     </ul></div>
   </div>
   <p class="subtitle">Step 3 is the skill being trained today.</p>
@@ -323,10 +323,10 @@ $ <span class="green">./scripts/check-setup.sh</span>
   </ul>
 </section>
 
-<!-- ══════════════ INTERSTITIAL 1 · AGENTIC ENGINEERING (1:20) ══════════════ -->
+<!-- ══════════════ INTERSTITIAL 1 · AGENTIC ENGINEERING (1:05) ══════════════ -->
 
 <section class="slide">
-  <div class="kicker"><b>1:20</b> · interstitial</div>
+  <div class="kicker"><b>1:05</b> · interstitial</div>
   <h1>Agentic engineering<br><span class="accent">nine habits</span></h1>
   <p class="subtitle">You just watched the loop work once.<br>These habits are why it worked - and what to do when it doesn't.</p>
 </section>
@@ -408,16 +408,16 @@ $ <span class="green">./scripts/check-setup.sh</span>
   <p class="subtitle mono" style="font-size: 0.7em">docs/workshop/02-agentic-best-practices.md</p>
 </section>
 
-<!-- ══════════════ INTERSTITIAL 2 · ADR SKILL (2:20) ══════════════ -->
+<!-- ══════════════ INTERSTITIAL 2 · ADR SKILL (1:55) ══════════════ -->
 
 <section class="slide">
-  <div class="kicker"><b>2:20</b> · interstitial</div>
+  <div class="kicker"><b>1:55</b> · interstitial</div>
   <h1>Why stop<br><span class="accent">and write?</span></h1>
   <p class="subtitle">The expensive failure isn't wrong code.<br>It's <b>right code implementing an undecided thing</b>.<br><br>ADR = the pushback artifact.</p>
 </section>
 
 <section class="slide">
-  <div class="kicker"><b>2:20</b> · live</div>
+  <div class="kicker"><b>1:55</b> · live</div>
   <h2>Watch the terminal</h2>
   <ul class="points">
     <li>"Implement OPS-5" → the plan <b>halts</b>: "ADR-0008 required first"</li>
@@ -428,7 +428,7 @@ $ <span class="green">./scripts/check-setup.sh</span>
 </section>
 
 <section class="slide">
-  <div class="kicker"><b>2:20</b> · take-home</div>
+  <div class="kicker"><b>1:55</b> · take-home</div>
   <ul class="points" style="font-size: 1.2em">
     <li><b>Instructions</b> tell the agent how to <span class="accent">behave</span></li>
     <li><b>Skills</b> tell it how <span class="accent">we</span> do things</li>
@@ -437,10 +437,10 @@ $ <span class="green">./scripts/check-setup.sh</span>
   <p class="quote">All three are just files in the repo.<span class="dim">Start Monday.</span></p>
 </section>
 
-<!-- ══════════════ WRAP-UP (3:30) ══════════════ -->
+<!-- ══════════════ WRAP-UP (2:50) ══════════════ -->
 
 <section class="slide">
-  <div class="kicker"><b>3:30</b> · show &amp; tell</div>
+  <div class="kicker"><b>2:50</b> · show &amp; tell</div>
   <h2>Retro</h2>
   <ul class="points">
     <li>Where did <b>pushback</b> win?</li>
@@ -452,15 +452,15 @@ $ <span class="green">./scripts/check-setup.sh</span>
 </section>
 
 <section class="slide">
-  <div class="kicker"><b>3:55</b> · cleanup &amp; thanks</div>
+  <div class="kicker"><b>2:55</b> · cleanup &amp; thanks</div>
   <h2>Before you go</h2>
   <ul class="points">
-    <li>Delete your workshop Jira project <span class="dim">- your site, your mess</span></li>
+    <li>Delete your workshop Jira project <span class="dim">- or close out your GitHub issues</span></li>
     <li>Keep the fork as a reference, or <code class="inline">gh repo delete</code></li>
     <li>Take the harness home: instructions + AGENTS.md + one skill, adapted to your team</li>
   </ul>
   <p class="subtitle mono">github.com/scholtenmartijn/schiphol-cop-workshop<br>github.com/scholtenmartijn/schiphol-cop-demo</p>
-  <p class="quote">Ticket read. Code written. Tests green. PR open.<span class="dim">And you never left the terminal. Thank you!</span></p>
+  <p class="quote">Issue read. Code written. Tests green. PR open.<span class="dim">And you never left the terminal. Thank you!</span></p>
 </section>
 
 <div id="pager"></div>
